@@ -22,13 +22,13 @@
         <!--<h3>Make a call</h3>-->
         <form id="make-call" class="pure-form">
             <input type="text" placeholder="あいてのチャットID" id="callto-id">
-            <button href="#" class="pure-button pure-button-success" type="submit">Call</button>
+            <button href="#" class="pure-button pure-button-success" type="submit">呼び出し</button>
         </form>
         <button id="button" onclick="toggleStartStop()"></button>
         <div id="textarea"></div>
         <form id="end-call" class="pure-form">
             <p>Currently in call with <span id="their-id">...</span></p>
-            <button href="#" class="pure-button pure-button-success" type="submit">End Call</button>
+            <button href="#" class="pure-button pure-button-success" type="submit">切断</button>
         </form>
     </div>
 </div>
@@ -74,7 +74,7 @@
   <script>
     // Prefer camera resolution nearest to 1280x720.
 var constraints = { audio: true, video: false }; 
-capture.volume(1);
+capture.volume(50);
 
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
