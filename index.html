@@ -2,7 +2,7 @@
 <html>
 <head lang="ja">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>SkyWay JS SDK Tutorial</title>
+    <title>1on1 MTG chat</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <div class="pure-g">
@@ -15,21 +15,57 @@
 
     <!-- Steps -->
     <div class="pure-u-1-3">
-        <h2>SkyWay Video Chat</h2>
+        <h2>1on1 MTG chat💬</h2>
 
-        <p>Your id: <span id="my-id">...</span></p>
+        <p>あなたのチャットID: <span id="my-id">...</span></p>
         <p>Share this id with others so they can call you.</p>
         <h3>Make a call</h3>
         <form id="make-call" class="pure-form">
             <input type="text" placeholder="Call user id..." id="callto-id">
             <button href="#" class="pure-button pure-button-success" type="submit">Call</button>
         </form>
+        <button id="button" onclick="toggleStartStop()"></button>
+        <div id="textarea"></div>
         <form id="end-call" class="pure-form">
             <p>Currently in call with <span id="their-id">...</span></p>
             <button href="#" class="pure-button pure-button-success" type="submit">End Call</button>
         </form>
     </div>
 </div>
+<script>
+    if ('webkitSpeechRecognition' in window) {
+    } else {
+      alert("このブラウザは音声文字起こしに対応していません。")
+    }
+    let recognizing;
+    let recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    button.innerHTML = "議事録開始";
+  
+    const reset = () => {
+      recognizing = false;
+    }
+  
+    recognition.onend = reset;
+    recognition.onresult = function (event) {
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          textarea.insertAdjacentHTML('beforeend', event.results[i][0].transcript + "<br>");
+        }
+      }
+    }
+  
+    const toggleStartStop = () => {
+      if (recognizing) {
+        recognition.stop();
+        reset();
+      } else {
+        recognition.start();
+        recognizing = true;
+        button.innerHTML = "停止 or 再開";
+      }
+    }
+  </script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
 <script type="text/javascript" src="script.js"></script>
