@@ -74,6 +74,7 @@
   <script>
     // Prefer camera resolution nearest to 1280x720.
 var constraints = { audio: true, video: false }; 
+capture.volume(1);
 
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
